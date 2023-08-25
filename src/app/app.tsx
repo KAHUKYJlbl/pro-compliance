@@ -10,15 +10,13 @@ import { AppRouter } from './provider/router';
 import { Oops } from '../widgets/oops';
 import { LoadingSpinner } from '../shared/ui/loading-spinner/loading-spinner';
 
-export default function App(): JSX.Element {
-  return (
-    <ErrorBoundary fallback={<Oops type='error-boundary' />}>
-      <Suspense fallback={<LoadingSpinner spinnerType='page' />}>
-        <Provider store={store}>
-          <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
-          <RouterProvider router={AppRouter} />
-        </Provider>
-      </Suspense>
-    </ErrorBoundary>
-  );
-}
+export const App = (): JSX.Element => (
+  <ErrorBoundary fallback={<Oops type="error-boundary" />}>
+    <Suspense fallback={<LoadingSpinner spinnerType="page" />}>
+      <Provider store={store}>
+        <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
+        <RouterProvider router={AppRouter} />
+      </Provider>
+    </Suspense>
+  </ErrorBoundary>
+);

@@ -1,4 +1,4 @@
-export type Good = {
+export type GoodType = {
   name: string,
   id: string,
-}
+};

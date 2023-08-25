@@ -1,5 +1,9 @@
-export const Good = (): JSX.Element => {
-  return (
-    <div>Good</div>
-  )
-}
+import { GoodType } from '../lib/types';
+
+type GoodProps = {
+  good: GoodType;
+};
+
+export const Good = ( { good }: GoodProps ): JSX.Element => (
+  <div>{good.name}</div>
+);

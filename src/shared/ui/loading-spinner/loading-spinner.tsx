@@ -32,9 +32,9 @@ const spinnerTypes = {
 
 type LoadingSpinnerProps = {
   spinnerType: keyof typeof spinnerTypes;
-}
+};
 
-export function LoadingSpinner ({spinnerType}: LoadingSpinnerProps): JSX.Element {
+export function LoadingSpinner( { spinnerType }: LoadingSpinnerProps ): JSX.Element {
   return (
     <Watch
       height={spinnerTypes[spinnerType].height}

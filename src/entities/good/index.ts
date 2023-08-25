@@ -1,1 +1,1 @@
-export type { Good } from './lib/types';
+export type { GoodType } from './lib/types';
