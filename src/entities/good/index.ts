@@ -1,1 +1,2 @@
-export type { GoodType } from './lib/types';
+export type { GoodType, StoredGoodType } from './lib/types';
+export { Good } from './ui/good';
