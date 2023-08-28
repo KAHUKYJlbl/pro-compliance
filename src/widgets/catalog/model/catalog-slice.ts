@@ -4,7 +4,7 @@ import { fetchCatalog } from './api-actions/fetch-catalog';
 
 import { NameSpace } from '../../../app/provider/store';
 import { FetchStatus } from '../../../shared/types/fetch-status';
-import { StoredGoodType } from '../../../entities/good';
+import { GoodType, StoredGoodType } from '../../../entities/good';
 
 type InitialState = {
   catalogLoadingStatus: FetchStatus;
@@ -29,12 +29,34 @@ export const catalogSlice = createSlice( {
         }
       ];
     },
+    addItem: ( state, action: PayloadAction<GoodType> ) => {
+      state.catalog = [
+        ...state.catalog,
+        {
+          good: action.payload,
+          removed: false,
+        }
+      ];
+    }
   },
   extraReducers( builder ) {
     builder
       .addCase( fetchCatalog.fulfilled, ( state, action ) => {
         state.catalogLoadingStatus = FetchStatus.Success;
-        state.catalog = action.payload.map( ( item ) => (
+        state.catalog = [
+          ...state.catalog,
+          ...action.payload
+            .filter( ( item ) =>
+              state.catalog.every( ( storeItem ) => storeItem.good.id !== item.id )
+            )
+            .map( ( item ) => (
+              {
+                good: item,
+                removed: false,
+              }
+            ) )
+        ];
+        action.payload.map( ( item ) => (
           {
             good: item,
             removed:
@@ -53,4 +75,4 @@ export const catalogSlice = createSlice( {
   }
 } );
 
-export const { removeItem } = catalogSlice.actions;
+export const { removeItem, addItem } = catalogSlice.actions;

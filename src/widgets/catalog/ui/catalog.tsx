@@ -1,9 +1,10 @@
 import { Good } from '../../../entities/good';
+import { Add } from '../../../features/add';
 import { useAppSelector } from '../../../shared/lib/hooks/use-app-selector';
 import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinner';
-import { useCatalog } from '../lib/hooks/use-catalog';
-import { getCatalogLoadingStatus } from '../model/catalog-selectors';
 
+import { getCatalogLoadingStatus } from '../model/catalog-selectors';
+import { useCatalog } from '../lib/hooks/use-catalog';
 import classes from './catalog.module.sass';
 
 export const Catalog = (): JSX.Element => {
@@ -15,12 +16,16 @@ export const Catalog = (): JSX.Element => {
   }
 
   return (
-    <div className={classes.catalog}>
-      {
-        catalog.map( ( element ) =>
-          <Good key={element.good.id} item={element} />
-        )
-      }
-    </div>
+    <>
+      <Add />
+
+      <div className={classes.catalog}>
+        {
+          catalog.map( ( element ) =>
+            <Good key={element.good.id} item={element} />
+          )
+        }
+      </div>
+    </>
   );
 };
