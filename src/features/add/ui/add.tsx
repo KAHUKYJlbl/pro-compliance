@@ -14,6 +14,7 @@ export const Add = (): JSX.Element => {
     e.preventDefault();
 
     dispatch( addItem( { name: currentValue, id: uniqid() } ) );
+    setCurrentValue( '' );
   };
 
   return (
